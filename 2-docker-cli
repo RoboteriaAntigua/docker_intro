@@ -1,0 +1,70 @@
+
+# ver imagenes
+    docker images
+
+# descargar imagenes
+    docker pull tecnologia : version
+    docker pull node:19
+    docker php:7.4-fpm
+
+# borrar una imagen
+    docker rm tag
+
+# crear un contenedor de imagenes
+    docker container create nombre_imagen (retorna un id que usaremos despues)
+# crear un contenedor pero con nombre elegido por nosotros
+    docker create --name nombre imagen
+
+# ejecutar un contenedor
+    docker start id o containerId
+
+# ver contenedores
+    docker ps -a
+
+# detener un contenedor
+    docker stop containerId
+
+# borrar un contenedor
+    docker rm -f containeriD(solo los 3 primeros digitos)
+    o si tiene nombre:
+        docker rm nombre
+        docker rm tete
+
+# ver los logs
+    docker logs nombre
+
+# Muchos pasos en uno, run:
+    (si encuentra la imagen la descarga, crea el contenedor y lo inicia)
+        docker run -d imagen --name tete
+
+# mapear puertos para conectarse al contenedor:
+    docker run -p 27017:27017  mongo
+
+# Ejecutar en segundo plano y con nombre:
+    docker run -d --name mynosql mongo
+
+# Persistir la data en algun lugar de nuestra pc (mapear una carpeta de nuestra pc con una carpeta de la instancia)
+    docker run -v /home/kuark/Escritorio/progra_2023_mayo/mongo:/data/db - mongo
+
+# ########## comando muy abarcativo ############
+    docker run -d -p 27017:27017 -v /home/kuark/Escritorio/progra_2023_mayo/mongo:/data/db --name mynosql mongo
+
+# ################################################
+
+# Entrar (tipo ssh) a la instancia: (correr un comando o el bash)
+    docker exec -it myInstancia bash
+
+# crear un contenedor con cierta imagen
+        docker create --name nombre_imagen -p(puerto del anfitrion):(puerto del docker)  nombreApp
+
+# Correr la aplicacion:
+    creo un archivo llamado Dockerfile (ver 3_server_node_en_docker)
+    y lo corro con docker start nombreServicio
+
+# Automatizo con un docker-compose.yml y lo corro con:
+        (ver en 4-automatizar_docker-compose)
+        docker compose up
+
+# Correr varios contenedores en cierto orden:
+    docker compose  (ver en 4-automatizar_docker-compose)    
+

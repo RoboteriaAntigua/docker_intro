@@ -1,0 +1,44 @@
+# ##################################################################
+#       Montar nuestro primer servidor en un docker               #
+# ##################################################################
+
+# 0 Descargo una imagen de node
+    Docker pull node:version
+
+# 1 Crear un Dockerfile:
+    FROM node                   #Nombre de la imagen (no el asignado sino la descargada)
+
+    RUN mkdir -p /home/app       #creo carpeta en el docker
+
+    COPY . /home/app              #copio el contenido de esta ruta ( .) en la carpeta creada
+
+    EXPOSE 3000                    #Escucho en el puerto 3000
+
+    CMD ["node","/home/app/9_CreateServer.js"]      //Ejecuto este comando en el docker
+
+# 2 Build    (creo la imagen)
+    docker build -t myapp:1 .
+    o sea:
+    docker build -t nombre_de_app_version ruta_del_Dockerfile
+
+# 3 creo el contenedor
+    docker create --name nodito -p3000:3000 myapp:1
+    // nodito es el nombre de la imagen a crear
+    // -p3000:3000 mapea el puerto 3000 del anfitrion al puerto 3000 del docker
+
+# 4 start
+    docker start nodito
+
+# listo escuchando en el 3000
+
+##### Con Nodemon (dockerfile.dev)
+
+FROM node 
+
+RUN npm i -g nodemon                      #instalate nodemon che docker
+
+RUN mkdir -p /home/app
+
+EXPOSE 3000
+
+CMD ["nodemon","9_CreateServer.js"]

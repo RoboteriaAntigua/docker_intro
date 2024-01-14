@@ -1,0 +1,18 @@
+################################################################################################################
+###     Que es Docker
+
+# No es una maquina virtual, ni imagen de vm, ni gestor de vms
+
+# Es una virtualizacion de la capa de aplicaciones y sus dependencias.
+
+# Asi entonces en un Contenedor podemos tener dependencias en una version, y en otro
+# contenedor dependencias en otra version, y en la maquina host otra version.
+
+# Dockers usa el nucleo del sistema operativo host, por ende, las "imagenes" dockers son ligeras, son solo las
+# dependencias.
+
+# Suele generarce confucion, porque es comun instalar dockers en una maquina virtual. Y luego trabajar
+# con contenedores en dicha vm.
+
+
+

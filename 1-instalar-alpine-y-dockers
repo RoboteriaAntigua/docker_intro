@@ -1,0 +1,40 @@
+
+##################### Instalar linux alpine ##############################################
+
+1 # Entrar con usuario root sin contraseña
+
+2 # setup-alpine    (Y se inicia la instalacion guiada)
+
+3 # lo cree con pw: Lamade2#
+
+4 # Para eligir el mejor mirror (espejo) presionamos F y enter para detectar el mejor
+    (dl-cdn.alpinelinux.org)
+
+5 # Apagar con: halt 
+
+
+
+######################### instalar Dockers #################################################
+
+1 # Instalar vim:
+        apk add vim
+
+2 # Editar el /etc/apk/repositories con vim, descomentar la parte de comunity
+
+3 # apk add docker
+
+4 # Correr el demon docker
+    rc-update add docker default
+    service docker start
+
+5 # Instalar docker compose
+    apk add docker-compose
+
+
+###################### primeros pasos #####################################
+
+1 # Instalo una imagen (por ejemplo node)
+    docker pull node:19
+    docker pull node:version 
+
+2 # seguimos en el siguiente (2_docker_cli)

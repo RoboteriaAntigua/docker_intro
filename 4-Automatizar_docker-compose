@@ -1,0 +1,78 @@
+##### Automatizar todo lo hecho en 1 #############
+
+#Se crea un archivo llamado: docker-compose.yml 
+y se corre con: docker compose up
+
+version: '3.9'              #version de compose
+services:     
+  nodito:                   #nombre de la imagen docker
+    build: .                # ruta del Dockerfile
+    ports:
+      - "3000:3000"         #puertos a la escucha
+      - "3001:3000"
+
+#se borran las imagenes creadas por compose con:
+    docker compose down
+
+#Para conectar varias imagenes en una red adentro de un contenedor:
+version: '3.9'
+services:
+  nodito:
+    build: .
+    ports:
+      - "3000:3000"
+      - "3001:3000"
+    links:
+      - monguito                                  #nodito se conecta a monguito:
+  monguito:
+    image: mongo                                  #usa la imagen mongo
+    ports:
+      - "27017:27017"
+    environment:                                   #variables de entorno
+      - MONGO_INITDB_ROOT_USERNAME=nico
+      - MONGO_INITDB_ROOT_PASSWORD=123
+
+#Volumes
+#para persistir data, se crea un volumes en el anfitrion
+  version: '3.9'
+services:
+  nodito:
+    build: .
+    ports:
+      - "3000:3000"
+      - "3001:3000"
+    links:
+      - monguito                                  #nodito se conecta a monguito:
+  monguito:
+    image: mongo                                  #usa la imagen mongo
+    ports:
+      - "27017:27017"
+    environment:                                   #variables de entorno
+      - MONGO_INITDB_ROOT_USERNAME=nico
+      - MONGO_INITDB_ROOT_PASSWORD=123
+
+    volumes:                                        #para persistir data
+      - data_persistir:/data/db
+
+volumes:
+  data-persistir
+
+
+
+
+####para que el compose busque este dockerfile de nombre y ruta diferente 
+#creo el (docker-compose-dev.yml):
+version: '3.9'
+services:
+  nodito:
+    build:
+      context: .                      
+      dockerfile: dockerfile.dev      #aqui apunto al nuevo dockerfile  
+    ports:
+      - "3000:3000"
+      - "3001:3000"
+    volumes:
+      - data_persistir:/data/db
+
+volumes:
+  data_persistir:

@@ -1,0 +1,9 @@
+FROM node 
+
+RUN npm i -g nodemon
+
+RUN mkdir -p /home/app
+
+EXPOSE 3000
+
+CMD ["nodemon","9_CreateServer.js"]

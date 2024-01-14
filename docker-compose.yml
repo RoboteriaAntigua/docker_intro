@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  nodito:
+    build: .
+    ports:
+      - "3000:3000"
+      - "3001:3000"
+    volumes:
+      - data_persistir:/data/db
+
+volumes:
+  data_persistir:

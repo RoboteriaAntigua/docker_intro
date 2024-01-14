@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  nodito:
+    build:
+      context: .
+      dockerfile: dockerfile.dev
+    ports:
+      - "3000:3000"
+      - "3001:3000"
+    volumes:
+      - data_persistir:/data/db
+
+volumes:
+  data_persistir:
